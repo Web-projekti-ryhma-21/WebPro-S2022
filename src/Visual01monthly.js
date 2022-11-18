@@ -90,7 +90,7 @@ const options = {
         xAxis: {
           type: "time",
           time: {
-            unit: "month",
+            unit: "year",
           },
         },
       },
@@ -99,7 +99,7 @@ const options = {
 
   return (
     <div style={{ width: "1500px" }}>
-      <h1>Visualization 01 dev</h1>
+      <h1>Monthly Visualization 01 dev</h1>
       <Line options={options} data={glomo_data} />
     </div>
   );

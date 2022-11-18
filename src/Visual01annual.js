@@ -2,19 +2,19 @@ import React from "react";
 import { Chart } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import zoomPlugin from 'chartjs-plugin-zoom';
-import globalmonthly from "./data/globalmonthly.json";
-import northmonthly from "./data/northernhemispheremonthly.json";
-import southmonthly from "./data/southernhemispheremonthly.json";
+import globalannual from "./data/globalannual.json";
+import northannual from "./data/northernhemisphereannual.json";
+import southannual from "./data/southernhemisphereannual.json";
 import "chartjs-adapter-luxon";
 
 export default function Visualization01(){
     Chart.register(zoomPlugin);
 
-const glomo_data = {
+const gloann_data = {
     datasets: [
         {
-            label: "southern hemisphere mothly ",
-            data: [...southmonthly],
+            label: "southern hemisphere annual ",
+            data: [...southannual],
             borderColor: "rgb(0, 0, 255)",
             backgroundColor: "rgba(0, 0, 0, 0.5)",
             //yAxisID: "anomaly",
@@ -27,8 +27,8 @@ const glomo_data = {
 
         },
         {
-            label: "northern hemisphere mothly ",
-            data: [...northmonthly],
+            label: "northern hemisphere annual ",
+            data: [...northannual],
             borderColor: "rgb(0, 255, 0)",
             backgroundColor: "rgba(0, 0, 0, 0.5)",
             //yAxisID: "anomaly",
@@ -41,8 +41,8 @@ const glomo_data = {
 
         },
         {
-            label: "global mothly ",
-            data: [...globalmonthly],
+            label: "global annual ",
+            data: [...globalannual],
             borderColor: "rgb(0, 0, 0)",
             backgroundColor: "rgba(0, 0, 0, 0.5)",
             //yAxisID: "anomaly",
@@ -58,49 +58,49 @@ const glomo_data = {
 };
 
 const options = {
-  responsive: true,
-  plugins: {
-      zoom: {
-                      zoom: {
-            wheel: {
-              enabled: true,
-              //modifierKey: 'ctrl',
+    responsive: true,
+    plugins: {
+        zoom: {
+                        zoom: {
+              wheel: {
+                enabled: true,
+                //modifierKey: 'ctrl',
+              },
+              drag: {
+                enabled: true,
+                backgroundColor: 'rgba(225,225,225,0.3)',
+                borderColor: 'rgba(225,225,225)',
+              },
+              mode: 'xy',
             },
-            drag: {
-              enabled: true,
-              //backgroundColor: 'rgba(225,225,225,0.3)',
-              //borderColor: 'rgba(225,225,225)',
+            limits: {
+                y: {min: -2, max: 2},
+                x: {min: 'original', max: 'original'},
             },
-            mode: 'xy',
           },
-          limits: {
-              y: {min: -2, max: 2},
-              x: {min: 'original', max: 'original'},
-          },
-        },
-    legend: {
-      position: "top",
-    },
-    title: {
-      display: true,
-      text: "v01 plot",
-    },
-  },
-    scales: {
-        xAxis: {
-          type: "time",
-          time: {
-            unit: "month",
-          },
-        },
+      legend: {
+        position: "top",
       },
-};
+      title: {
+        display: true,
+        text: "v01 plot",
+      },
+    },
+      scales: {
+          xAxis: {
+            type: "time",
+            time: {
+              unit: "year",
+            },
+          },
+        },
+  };
   
 
   return (
     <div style={{ width: "1500px" }}>
-      <h1>Visualization 01 dev</h1>
-      <Line options={options} data={glomo_data} />
+      <h1>Annual Visualization 01 dev</h1>
+      <Line options={options} data={gloann_data} />
     </div>
   );
 }
