@@ -1,59 +1,105 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Chart } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import zoomPlugin from 'chartjs-plugin-zoom';
 import globalmonthly from "./data/globalmonthly.json";
 import northmonthly from "./data/northernhemispheremonthly.json";
 import southmonthly from "./data/southernhemispheremonthly.json";
+import globalannual from "./data/globalannual.json";
+import northannual from "./data/northernhemisphereannual.json";
+import southannual from "./data/southernhemisphereannual.json";
 import "chartjs-adapter-luxon";
 
 export default function Visualization01(){
     Chart.register(zoomPlugin);
 
-const glomo_data = {
+    const [glMonth, setGlMonth] = useState([...globalmonthly]);
+    const [noMonth, setNoMonth] = useState([...northmonthly]);
+    const [soMonth, setSoMonth] = useState([...southmonthly]);
+    const [glAnn, setGlAnn] = useState([...globalannual]);
+    const [noAnn, setNoAnn] = useState([...northannual]);
+    const [soAnn, setSoAnn] = useState([...southannual]);
+
+const data = {
     datasets: [
-        {
-            label: "southern hemisphere mothly ",
-            data: [...southmonthly],
-            borderColor: "rgb(0, 0, 255)",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            //yAxisID: "anomaly",
-            //xAxisID: "time",
-            parsing: {
-                xAxisKey:"time",
-                yAxisKey:"anomaly",
-            },
-            pointRadius: 1,
-
-        },
-        {
-            label: "northern hemisphere mothly ",
-            data: [...northmonthly],
-            borderColor: "rgb(0, 255, 0)",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            //yAxisID: "anomaly",
-            //xAxisID: "time",
-            parsing: {
-                xAxisKey:"time",
-                yAxisKey:"anomaly",
-            },
-            pointRadius: 1,
-
-        },
-        {
-            label: "global mothly ",
-            data: [...globalmonthly],
-            borderColor: "rgb(0, 0, 0)",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            //yAxisID: "anomaly",
-            //xAxisID: "time",
-            parsing: {
-                xAxisKey:"time",
-                yAxisKey:"anomaly",
-            },
-            pointRadius: 1,
-
-        },
+      {
+          label: "global annual ",
+          data: [...glAnn],
+          borderColor: "rgb(0, 0, 0)",
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          //yAxisID: "anomaly",
+          //xAxisID: "time",
+          parsing: {
+              xAxisKey:"time",
+              yAxisKey:"anomaly",
+          },
+          pointRadius: 1,
+      },
+      {
+          label: "global mothly ",
+          data: [...glMonth],
+          borderColor: "rgb(0, 0, 0)",
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          //yAxisID: "anomaly",
+          //xAxisID: "time",
+          parsing: {
+              xAxisKey:"time",
+              yAxisKey:"anomaly",
+          },
+          pointRadius: 1,
+      },
+      {
+          label: "northern hemisphere annual ",
+          data: [...noAnn],
+          borderColor: "rgb(0, 0, 255)",
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          //yAxisID: "anomaly",
+          //xAxisID: "time",
+          parsing: {
+              xAxisKey:"time",
+              yAxisKey:"anomaly",
+          },
+          pointRadius: 1,
+      },
+      {
+          label: "northern hemisphere mothly ",
+          data: [...noMonth],
+          borderColor: "rgb(0, 0, 255)",
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          //yAxisID: "anomaly",
+          //xAxisID: "time",
+          parsing: {
+              xAxisKey:"time",
+              yAxisKey:"anomaly",
+          },
+          pointRadius: 1,
+      },
+      {
+          label: "southern hemisphere annual ",
+          data: [...soAnn],
+          borderColor: "rgb(0, 255, 0)",
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          //yAxisID: "anomaly",
+          //xAxisID: "time",
+          parsing: {
+              xAxisKey:"time",
+              yAxisKey:"anomaly",
+          },
+          pointRadius: 1,
+      },
+      {
+          label: "southern hemisphere mothly ",
+          data: [...soMonth],
+          borderColor: "rgb(0, 255, 0)",
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          //yAxisID: "anomaly",
+          //xAxisID: "time",
+          parsing: {
+              xAxisKey:"time",
+              yAxisKey:"anomaly",
+          },
+          pointRadius: 1,
+      },
     ],
 };
 
@@ -66,11 +112,11 @@ const options = {
               enabled: true,
               //modifierKey: 'ctrl',
             },
-            drag: {
+            /*drag: {
               enabled: true,
               //backgroundColor: 'rgba(225,225,225,0.3)',
               //borderColor: 'rgba(225,225,225)',
-            },
+            },*/
             mode: 'xy',
           },
           limits: {
@@ -99,8 +145,8 @@ const options = {
 
   return (
     <div style={{ width: "1500px" }}>
-      <h1>Visualization 01 dev</h1>
-      <Line options={options} data={glomo_data} />
+      <h1>Visualization 01 usestate dev</h1>
+      <Line options={options} data={data} />
     </div>
   );
 }
