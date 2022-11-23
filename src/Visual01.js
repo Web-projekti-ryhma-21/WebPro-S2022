@@ -2,23 +2,36 @@ import React, {useState, useEffect} from "react";
 import { Chart } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import zoomPlugin from 'chartjs-plugin-zoom';
-import globalmonthly from "./data/globalmonthly.json";
-import northmonthly from "./data/northernhemispheremonthly.json";
-import southmonthly from "./data/southernhemispheremonthly.json";
-import globalannual from "./data/globalannual.json";
-import northannual from "./data/northernhemisphereannual.json";
-import southannual from "./data/southernhemisphereannual.json";
+import axios from "axios";
 import "chartjs-adapter-luxon";
 
 export default function Visualization01(){
     Chart.register(zoomPlugin);
 
-    const [glMonth, setGlMonth] = useState([...globalmonthly]);
-    const [noMonth, setNoMonth] = useState([...northmonthly]);
-    const [soMonth, setSoMonth] = useState([...southmonthly]);
-    const [glAnn, setGlAnn] = useState([...globalannual]);
-    const [noAnn, setNoAnn] = useState([...northannual]);
-    const [soAnn, setSoAnn] = useState([...southannual]);
+    const [glMonth, setGlMonth] = useState([]);
+    const [noMonth, setNoMonth] = useState([]);
+    const [soMonth, setSoMonth] = useState([]);
+    const [glAnn, setGlAnn] = useState([]);
+    const [noAnn, setNoAnn] = useState([]);
+    const [soAnn, setSoAnn] = useState([]);
+
+    useEffect(() => {
+      async function getNoMonth() {
+        const r = await axios.get("http://localhost:3001/northernhemispheremonthly");
+        setNoMonth(r.data);
+        console.log(r.data);
+      }
+      getNoMonth();
+    }, []);
+
+    useEffect(() => {
+      async function getSoMonth() {
+        const r = await axios.get("http://localhost:3001/southernhemispheremonthly");
+        setSoMonth(r.data);
+        console.log(r.data);
+      }
+      getSoMonth();
+    }, []);
 
 const data = {
     datasets: [

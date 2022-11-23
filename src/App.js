@@ -1,5 +1,4 @@
 import './App.css';
-import Co2Chart from './Co2chart';
 import Visualization01 from './Visual01';
 
 function App() {
