@@ -39,5 +39,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Web-projekti-ryhma-21/client.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Web-projekti-ryhma-21/client/issues"
+  },
+  "homepage": "https://github.com/Web-projekti-ryhma-21/client#readme",
+  "description": ""
 }
