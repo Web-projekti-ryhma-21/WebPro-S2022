@@ -1,9 +1,11 @@
 import './App.css';
+import Co2Chart from './Co2chart';
+import Visualization01 from './Visual01';
 
 function App() {
   return (
     <div className="App">
-      hello world
+      <Visualization01/>
     </div>
   );
 }

@@ -7,9 +7,13 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "chart.js": "^4.0.1",
+    "chartjs-adapter-luxon": "^1.2.1",
+    "chartjs-plugin-zoom": "^1.2.1",
     "localforage": "^1.10.0",
+    "luxon": "^3.1.0",
     "match-sorter": "^6.3.1",
     "react": "^18.2.0",
+    "react-chartjs-2": "^5.0.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
@@ -39,5 +43,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Web-projekti-ryhma-21/client.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Web-projekti-ryhma-21/client/issues"
+  },
+  "homepage": "https://github.com/Web-projekti-ryhma-21/client#readme",
+  "description": ""
 }
