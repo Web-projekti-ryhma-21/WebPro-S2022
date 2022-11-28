@@ -1,9 +1,10 @@
 import './App.css';
+import Visualization01 from './Visual01';
 
 function App() {
   return (
     <div className="App">
-      hello world
+      <Visualization01/>
     </div>
   );
 }
