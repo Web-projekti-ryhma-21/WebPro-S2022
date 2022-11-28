@@ -60,7 +60,7 @@ const data = {
     datasets: [
       {
           label: "global annual ",
-          data: [...glAnn],
+          data: glAnn,
           borderColor: "rgb(255, 0, 0)",
           backgroundColor: "rgba(0, 0, 0, 0.5)",
           parsing: {
@@ -70,7 +70,7 @@ const data = {
       },
       {
           label: "global mothly ",
-          data: [...glMonth],
+          data: glMonth,
           borderColor: "rgb(255, 0, 0)",
           backgroundColor: "rgba(0, 0, 0, 0.5)",
           parsing: {
@@ -80,7 +80,7 @@ const data = {
       },
       {
           label: "northern hemisphere annual ",
-          data: [...noAnn],
+          data: noAnn,
           borderColor: "rgb(0, 0, 255)",
           backgroundColor: "rgba(0, 0, 0, 0.5)",
           parsing: {
@@ -90,7 +90,7 @@ const data = {
       },
       {
           label: "northern hemisphere mothly ",
-          data: [...noMonth],
+          data: noMonth,
           borderColor: "rgb(0, 0, 255)",
           backgroundColor: "rgba(0, 0, 0, 0.5)",
           parsing: {
@@ -100,7 +100,7 @@ const data = {
       },
       {
           label: "southern hemisphere annual ",
-          data: [...soAnn],
+          data: soAnn,
           borderColor: "rgb(0, 255, 0)",
           backgroundColor: "rgba(0, 0, 0, 0.5)",
           parsing: {
@@ -110,7 +110,7 @@ const data = {
       },
       {
           label: "southern hemisphere mothly ",
-          data: [...soMonth],
+          data: soMonth,
           borderColor: "rgb(0, 255, 0)",
           backgroundColor: "rgba(0, 0, 0, 0.5)",
           parsing: {
@@ -129,13 +129,10 @@ const options = {
         zoom: {
             wheel: {
               enabled: true,
-              //modifierKey: 'ctrl',
             },
             drag: {
               enabled: true,
               treshold: 100,
-              //backgroundColor: 'rgba(225,225,225,0.3)',
-              //borderColor: 'rgba(225,225,225)',
             },
             mode: 'xy',
           },
@@ -177,7 +174,7 @@ const chartRef = React.useRef(null);
   
   return (
     <div style={{ width: "95%" }}>
-      <h1>Visualization 01 usestate dev</h1>
+      <h1>Visualization 01</h1>
         <Line 
         ref={chartRef}
         type='line'
@@ -186,7 +183,7 @@ const chartRef = React.useRef(null);
         redraw = 'true'
         />
         <button onClick={handleResetZoom}>Reset Zoom</button>
-        <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/">Source </a>
+        <a class="source-link" href="https://www.metoffice.gov.uk/hadobs/hadcrut5/">Source</a>
     </div>
   );
 }
