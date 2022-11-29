@@ -26,7 +26,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "devstart": "react-scripts start nodemon src/server/index.js"
   },
   "eslintConfig": {
     "extends": [
@@ -56,7 +57,5 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Web-projekti-ryhma-21/client/issues"
-  },
-  "homepage": "https://github.com/Web-projekti-ryhma-21/client#readme",
-  "description": ""
+  }
 }

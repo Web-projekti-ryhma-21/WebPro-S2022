@@ -183,7 +183,7 @@ const chartRef = React.useRef(null);
         redraw = 'true'
         />
         <button onClick={handleResetZoom}>Reset Zoom</button>
-        <a class="source-link" href="https://www.metoffice.gov.uk/hadobs/hadcrut5/">Source</a>
+        <a className="source-link" href="https://www.metoffice.gov.uk/hadobs/hadcrut5/">Source</a>
     </div>
   );
 }
