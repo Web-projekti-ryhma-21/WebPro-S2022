@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const mysql = require('mysql2/promise')
 const config = require('./config')
+const { useResolvedPath } = require('react-router-dom')
 
 
 const app = express()
@@ -83,4 +84,23 @@ app.get("/southernhemispheremonthly",async function (req,res){
     }
 
 })
+app.post('/register',
+        (req, res) => {
+
+  const salt = bcrypt.genSaltSync(6);
+  const hashedPassword = bcrypt.hashSync(req.body.password, salt);
+  const newUser = {
+    id: uuidv4(),
+    username: req.body.username,
+    password: hashedPassword
+  }
+  users.push(newUser);
+  console.log(users);
+  res.send("OK");
+
+  console.log(hashedPassword);
+  users.addUser(req.body.username, hashedPassword);
+
+});
+
 app.listen(port)
