@@ -1,3 +1,15 @@
+.protected{
+  background-color: red;
+}
+
+.koti {
+
+padding: 15%;
+margin: 10%;
+
+  
+}
+
 .App {
   text-align: center;
 }
