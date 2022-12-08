@@ -143,4 +143,16 @@ app.get("/v4ica3",async function (req,res){
     }
 
 })
+app.get("/v5vostok",async function (req,res){
+    try{
+        const connection = await mysql.createConnection(config.db)
+        const [result] = await connection.execute('SELECT * FROM vostokicecore')
+
+        if (!result) result=[]
+        res.status(200).json(result)
+    } catch(err){
+        res.status(500).json({error:err.message})
+    }
+
+})
 app.listen(port)
