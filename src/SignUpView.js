@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function SignUpView() {
 
-  const [signupAnnouncerState, setSignupAnnouncerState] = useState("...")
+  const [signupAnnouncerState, setSignupAnnouncerState] = useState("idle")
   const navigate = useNavigate();
 
    const SignUpForm = async (event) => {
@@ -21,13 +21,35 @@ export default function SignUpView() {
         }
         );
         console.log(result);
-        navigate('/login', { replace: true });
+        setSignupAnnouncerState("signupSuccess")
+        setTimeout(() => {
+            navigate('/login', { replace: true });
+        }, 1500)
+        
 
     } catch (error) {
         console.log(error);
+        setSignupAnnouncerState("signupFailure")
     }
    }
+   let signupUIControls = null;
+   switch(signupAnnouncerState) {
+    case "idle":
+    signupUIControls = <button type="submit">Signup</button>
+    break;
 
+    case "processing":
+    signupUIControls = <span>Processing...</span>
+    break;
+
+    case "signupSuccess":
+        signupUIControls = <span style={{ color: "green"}}>Signup succes</span>
+        break;
+
+    case "signupFailure":
+        signupUIControls = <span style={{color:"red"}}>Error</span>
+        break;
+   }
     
     return (
         <div>
@@ -42,7 +64,7 @@ export default function SignUpView() {
                     <input type="text" name="password"></input>
                 </div>
                 <div>
-                    <button type="submit">Luo käyttäjä</button>
+                    { signupUIControls }
                 </div>
             </form>
             </div>

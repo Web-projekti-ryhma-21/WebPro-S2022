@@ -1,17 +1,78 @@
 const express = require('express')
 const cors = require('cors')
+const passport = require('passport')
+const BasicStrategy = require('passport-http').BasicStrategy
+const jwt = require('jsonwebtoken')
+const JwtStrategy = require('passport-jwt').Strategy,
+    ExtractJwt = require('passport-jwt').ExtractJwt
+    const bodyParser = require('body-parser')
 const mysql = require('mysql2/promise')
 const config = require('./config')
+const {v4: uuidv4 } = require('uuid')
+const { db } = require('./config')
+const bcrypt = require('bcrypt')
 const { useResolvedPath } = require('react-router-dom')
 
 
 const app = express()
 
+app.use(bodyParser.json());
 app.use(cors())
 app.use(express.json())
+app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.urlencoded({extended:false}))
 
+const users = [
+    {
+        id: 1,
+        username: 'testiuser',
+        password: '11111'
+    },
+    {
+        id: 2,
+        username: 'demouser',
+        password: '12345'
+    }
+]
+
+passport.use(new BasicStrategy(
+function(username, password, done) {
+    console.log('username ' + username);
+    console.log('password ' + password);
+
+    const user = users.find(u => u.username === username);
+
+    if (user != null) {
+        if(user.password === password){
+            done(null, user)
+
+        } else {
+            done(null, false);
+        }
+
+    } else {
+        done(null, false);
+    }
+}
+));
+
+const jwtOptions = {
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    secretOrKey: "MySecretKey"
+}
+
+passport.use(new JwtStrategy(jwtOptions, function(jwt_payload, done){
+    console.log('JWT is valid');
+    console.log('payload is as follows');
+    console.log(jwt_payload);
+
+    done(null, jwt_payload);
+}))
+
+
 const port = 3001
+
+
 app.get("/globalannual",async function (req,res){
     try{
         const connection = await mysql.createConnection(config.db)
@@ -101,6 +162,34 @@ app.post('/register',
   console.log(hashedPassword);
   users.addUser(req.body.username, hashedPassword);
 
-});
+})
 
+app.post(
+    '/login',
+    passport.authenticate('basic', { session: false }),
+    (req, res) => {
+
+  
+      const payload = {
+        user: {
+            id: req.user.id,
+            username: req.user.username
+        }
+      };
+  
+      const options = {
+        expiresIn: '1d'
+      }
+  
+      const secretKey = "MySecretKey";
+
+      const token = jwt.sign(payload, secretKey, options);
+  
+      return res.json({ jwt: token });
+  });
+
+  app.get('/protected', passport.authenticate('jwt', { session: false }), (req, res) => {
+    res.send("OK for user " + req.user.user.username + 'id is' + req.user.user.id);
+  })
+  
 app.listen(port)
