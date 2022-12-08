@@ -6,7 +6,7 @@ import axios from "axios";
 import "chartjs-adapter-luxon";
 
 export default function Visualization3n4(){
-    Chart.register(zoomPlugin);
+    //Chart.register(zoomPlugin);
 
     const [vostokCore, setVostokCore] = useState([]);
     
@@ -20,10 +20,10 @@ export default function Visualization3n4(){
     useEffect(() => {
       async function getVostokCore() {
         const r = await axios.get(`${domain}:${port}/${rest01}`);
+        r.data.reverse(); //reverse array so it goes from past to present
         setVostokCore(r.data);
         console.log(r.data); 
       }
-
       getVostokCore();
     }, []);
 
@@ -48,6 +48,7 @@ const options = {
   responsive: true,
   animation: false,
   plugins: {
+    /*
       zoom: {
         zoom: {
             wheel: {
@@ -60,11 +61,12 @@ const options = {
             mode: 'xy',
           },
           limits: {
-              y: {min: 250, max: 450, /*minRange: 0.1*/},
-              x: {min: 'original', max: 'original'/*, minRange: 30*/},
+              y: {min: 250, max: 450, minRange: 0.1},
+              x: {min: 'original', max: 'original', minRange: 30},
           },
         },
-    legend: {
+    */
+   legend: {
       position: "top",
     },
     title: {
@@ -113,7 +115,6 @@ const chartRef = React.useRef(null);
         data={data} 
         redraw = 'true'
         />
-        <button onClick={handleResetZoom}>Reset Zoom</button>
         <a className="source-link" href="">Source</a>
     </div>
   );
