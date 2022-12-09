@@ -222,7 +222,7 @@ app.get("/v5vostok",async function (req,res){
 app.get("/v6icecore",async function (req,res){
     try{
         const connection = await mysql.createConnection(config.db)
-        const [result] = await connection.execute('SELECT * FROM icecore800k')
+        const [result] = await connection.execute('SELECT * FROM icecore800kneg')
 
         if (!result) result=[]
         res.status(200).json(result)

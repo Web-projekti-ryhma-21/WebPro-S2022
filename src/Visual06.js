@@ -1,13 +1,9 @@
 import React, {useState, useEffect} from "react";
-import { Chart } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
-import zoomPlugin from 'chartjs-plugin-zoom';
 import axios from "axios";
 import "chartjs-adapter-luxon";
 
 export default function Visualization06(){
-    Chart.register(zoomPlugin);
-
     const [icecore800k, setIcecore800k] = useState([]);
     
     const port = 3001
@@ -22,7 +18,6 @@ export default function Visualization06(){
         const r = await axios.get(`${domain}:${port}/${rest01}`);
         r.data.reverse(); //reverse array so it goes from past to present
         setIcecore800k(r.data);
-        console.log(r.data); 
       }
 
       getIcecore800k();
@@ -46,22 +41,6 @@ export default function Visualization06(){
         responsive: true,
         animation: false,
         plugins: {
-            zoom: {
-              zoom: {
-                  wheel: {
-                    enabled: true,
-                  },
-                  drag: {
-                    enabled: true,
-                    treshold: 100,
-                  },
-                  mode: 'xy',
-                },
-                limits: {
-                    y: {min: 250, max: 450, /*minRange: 0.1*/},
-                    x: {min: 'original', max: 'original'/*, minRange: 30*/},
-                },
-              },
           legend: {
             position: "top",
           },
@@ -70,21 +49,10 @@ export default function Visualization06(){
             text: "v06 plot",
           },
         },
-        scales: {
-          /*
+        scales: {          
             xAxis: {
-              type: "time",
-              time: {
-                unit: "year",
-              },
+              display: false,
             },
-            
-            adapters:{
-              date:{
-              numberingSystem: "era",
-              },
-            },
-            */
         },
         elements: {
           point: {
@@ -92,26 +60,16 @@ export default function Visualization06(){
           }
         }
       };
-      
-      const chartRef = React.useRef(null);
-      
-        const handleResetZoom = () => {
-          if (chartRef && chartRef.current) {
-            chartRef.current.resetZoom();
-          }
-        };
-        
+              
         return (
           <div style={{ width: "95%" }}>
             <h1>Visualization 06</h1>
               <Line 
-              ref={chartRef}
               type='line'
               options={options} 
               data={data} 
               redraw = 'true'
               />
-              <button onClick={handleResetZoom}>Reset Zoom</button>
               <a className="source-link" href="">Source</a>
           </div>
         );

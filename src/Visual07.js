@@ -1,13 +1,9 @@
 import React, {useState, useEffect} from "react";
-import { Chart } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
-import zoomPlugin from 'chartjs-plugin-zoom';
 import axios from "axios";
 import "chartjs-adapter-luxon";
 
 export default function Visualization06(){
-    Chart.register(zoomPlugin);
-
     const [v7temperaturechange, setv7temperaturechange] = useState([]);
     const [v7co2, setv7co2] = useState([]);
     
@@ -23,12 +19,10 @@ export default function Visualization06(){
       async function getv7temperaturechange() {
         const r = await axios.get(`${domain}:${port}/${rest01}`);
         setv7temperaturechange(r.data);
-        console.log(r.data); 
       }
       async function getv7co2() {
         const r = await axios.get(`${domain}:${port}/${rest02}`);
         setv7co2(r.data);
-        console.log(r.data); 
       }
 
       getv7temperaturechange();
@@ -104,25 +98,16 @@ export default function Visualization06(){
         }
       };
 
-      const chartRef = React.useRef(null);
-      
-      const handleResetZoom = () => {
-        if (chartRef && chartRef.current) {
-          chartRef.current.resetZoom();
-        }
-      };
-      
+     
       return (
         <div style={{ width: "95%" }}>
           <h1>Visualization 07</h1>
             <Line 
-            ref={chartRef}
             type='line'
             options={options} 
             data={data} 
             redraw = 'true'
             />
-            <button onClick={handleResetZoom}>Reset Zoom</button>
             <a className="source-link" href="">Source</a>
         </div>
       );

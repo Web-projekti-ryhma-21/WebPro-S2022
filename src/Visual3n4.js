@@ -29,27 +29,22 @@ export default function Visualization3n4(){
       async function getMoaAnn() {
         const r = await axios.get(`${domain}:${port}/${rest01}`);
         setMoaAnn(r.data);
-        console.log(r.data); 
       }
       async function getMoaMonth() {
         const r = await axios.get(`${domain}:${port}/${rest02}`);
         setMoaMonth(r.data);
-        console.log(r.data); 
       }
       async function getDe081() {
         const r = await axios.get(`${domain}:${port}/${rest03}`);
         setIcDe081(r.data);
-        console.log(r.data); 
       }
       async function getDe082() {
         const r = await axios.get(`${domain}:${port}/${rest04}`);
         setIcDe082(r.data);
-        console.log(r.data); 
       }
       async function getIcDss() {
         const r = await axios.get(`${domain}:${port}/${rest05}`);
         setIcDss(r.data);
-        console.log(r.data); 
       }
       getMoaAnn();
       getMoaMonth();

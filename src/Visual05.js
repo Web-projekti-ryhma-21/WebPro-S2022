@@ -1,13 +1,9 @@
 import React, {useState, useEffect} from "react";
-import { Chart } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
-import zoomPlugin from 'chartjs-plugin-zoom';
 import axios from "axios";
 import "chartjs-adapter-luxon";
 
 export default function Visualization3n4(){
-    //Chart.register(zoomPlugin);
-
     const [vostokCore, setVostokCore] = useState([]);
     
     const port = 3001
@@ -22,7 +18,6 @@ export default function Visualization3n4(){
         const r = await axios.get(`${domain}:${port}/${rest01}`);
         r.data.reverse(); //reverse array so it goes from past to present
         setVostokCore(r.data);
-        console.log(r.data); 
       }
       getVostokCore();
     }, []);
@@ -48,24 +43,6 @@ const options = {
   responsive: true,
   animation: false,
   plugins: {
-    /*
-      zoom: {
-        zoom: {
-            wheel: {
-              enabled: true,
-            },
-            drag: {
-              enabled: true,
-              treshold: 100,
-            },
-            mode: 'xy',
-          },
-          limits: {
-              y: {min: 250, max: 450, minRange: 0.1},
-              x: {min: 'original', max: 'original', minRange: 30},
-          },
-        },
-    */
    legend: {
       position: "top",
     },
@@ -96,20 +73,11 @@ const options = {
     }
   }
 };
-
-const chartRef = React.useRef(null);
-
-  const handleResetZoom = () => {
-    if (chartRef && chartRef.current) {
-      chartRef.current.resetZoom();
-    }
-  };
   
   return (
     <div style={{ width: "95%" }}>
       <h1>Visualization 05</h1>
         <Line 
-        ref={chartRef}
         type='line'
         options={options} 
         data={data} 
