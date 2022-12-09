@@ -14,6 +14,8 @@ export default function Visualization01(){
     const [glAnn, setGlAnn] = useState([]);
     const [noAnn, setNoAnn] = useState([]);
     const [soAnn, setSoAnn] = useState([]);
+    const [vTwo, setVTwo] = useState([]);
+
     
     const port = 3001
     const domain = 'http://localhost'
@@ -32,6 +34,7 @@ export default function Visualization01(){
       }
       async function getSoAnn() {
         const r = await axios.get(`${domain}:${port}/southernhemisphereannual`);
+        console.log(r.data);        
         setSoAnn(r.data);
       }
       async function getGlMonth() {
@@ -44,7 +47,13 @@ export default function Visualization01(){
       }
       async function getSoMonth() {
         const r = await axios.get(`${domain}:${port}/southernhemispheremonthly`);
+        console.log(r.data);        
         setSoMonth(r.data);        
+      }
+      async function getVTwo() {
+        const r = await axios.get(`${domain}:${port}/v2`);
+        setVTwo(r.data);
+        console.log(r.data);        
       }
       getGlAnn();
       getGlMonth();
@@ -52,6 +61,7 @@ export default function Visualization01(){
       getNoMonth();
       getSoAnn();
       getSoMonth(); 
+      getVTwo(); 
     }, []);
 
 
@@ -62,7 +72,7 @@ const data = {
           label: "global annual ",
           data: glAnn,
           borderColor: "rgb(255, 0, 0)",
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          backgroundColor: "rgba(0, 0, 0, 0.8)",
           parsing: {
               xAxisKey:"time",
               yAxisKey:"anomaly",
@@ -72,7 +82,7 @@ const data = {
           label: "global mothly ",
           data: glMonth,
           borderColor: "rgb(255, 0, 0)",
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          backgroundColor: "rgba(0, 0, 0, 0.8)",
           parsing: {
               xAxisKey:"time",
               yAxisKey:"anomaly",
@@ -82,7 +92,7 @@ const data = {
           label: "northern hemisphere annual ",
           data: noAnn,
           borderColor: "rgb(0, 0, 255)",
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          backgroundColor: "rgba(0, 0, 0, 0.8)",
           parsing: {
               xAxisKey:"time",
               yAxisKey:"anomaly",
@@ -92,7 +102,7 @@ const data = {
           label: "northern hemisphere mothly ",
           data: noMonth,
           borderColor: "rgb(0, 0, 255)",
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          backgroundColor: "rgba(0, 0, 0, 0.8)",
           parsing: {
               xAxisKey:"time",
               yAxisKey:"anomaly",
@@ -102,7 +112,7 @@ const data = {
           label: "southern hemisphere annual ",
           data: soAnn,
           borderColor: "rgb(0, 255, 0)",
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          backgroundColor: "rgba(0, 0, 0, 0.8)",
           parsing: {
               xAxisKey:"time",
               yAxisKey:"anomaly",
@@ -112,12 +122,22 @@ const data = {
           label: "southern hemisphere mothly ",
           data: soMonth,
           borderColor: "rgb(0, 255, 0)",
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          backgroundColor: "rgba(0, 0, 0, 0.8)",
           parsing: {
               xAxisKey:"time", // jos ei piirry niin tarkista tietokanta, koska kirjainkoolla on väliä ja ekassa tk'ssa oli isolla kirjaimella
               yAxisKey:"anomaly",
           },
       },
+      {
+        label: "2000 year temperature ",
+        data: vTwo,
+        borderColor: "rgb(0, 0, 0)",
+        backgroundColor: "rgba(0, 0, 0, 0.8)",
+        parsing: {
+            xAxisKey:"time",
+            yAxisKey:"anomaly",
+        },
+    },
     ],
 };
 
@@ -132,13 +152,16 @@ const options = {
             },
             drag: {
               enabled: true,
-              treshold: 100,
             },
             mode: 'xy',
           },
           limits: {
-              y: {min: -2, max: 2, minRange: 0.1},
-              x: {min: 'original', max: 'original', minRange: 30},
+              y: {
+                min: -2, max: 2, minRange: 0.1
+              },
+              x: {
+                min: 'original', max: 'original',minRange: 30
+            },
           },
         },
     legend: {
@@ -152,10 +175,12 @@ const options = {
   scales: {
       xAxis: {
         type: "time",
+        display: true,
         time: {
-          unit: "month",
+          unit: "year",
         },
       },
+
   },
   elements: {
     point: {

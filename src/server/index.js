@@ -146,6 +146,19 @@ app.get("/southernhemispheremonthly",async function (req,res){
 
 })
 
+app.get("/v2",async function (req,res){
+    try{
+        const connection = await mysql.createConnection(config.db)
+        const [result] = await connection.execute('SELECT * FROM v2month')
+
+        if (!result) result=[]
+        res.status(200).json(result)
+    } catch(err){
+        res.status(500).json({error:err.message})
+    }
+
+})
+
 app.get("/v3annnual",async function (req,res){
     try{
         const connection = await mysql.createConnection(config.db)
@@ -158,6 +171,7 @@ app.get("/v3annnual",async function (req,res){
     }
 
 })
+
 app.get("/v3monthly",async function (req,res){
     try{
         const connection = await mysql.createConnection(config.db)
