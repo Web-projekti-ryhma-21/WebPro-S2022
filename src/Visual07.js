@@ -40,23 +40,23 @@ export default function Visualization06(){
           {
               label: "v7 temperature change",
               data: v7temperaturechange,
-              borderColor: "rgb(0, 0, 0)",
-              backgroundColor: "rgba(0, 0, 0, 0.8)",
+              borderColor: "rgb(0, 0, 155)",
+              backgroundColor: "rgba(0, 0, 155, 0.8)",
+              yAxisID:"temp",
               parsing: {
                   xAxisKey:"year", //needs to match column name in db
                   yAxisKey:"tc",
-                  yAxisID:"temp"
               },
           },
           {
             label: "v7 CO2",
             data: v7co2,
-            borderColor: "rgb(0, 0, 0)",
-            backgroundColor: "rgba(0, 0, 0, 0.8)",
+            borderColor: "rgb(0, 155, 0)",
+            backgroundColor: "rgba(0, 155, 0, 0.8)",
+            yAxisID:"co2ppm",
             parsing: {
                 xAxisKey:"year", //needs to match column name in db
-                yAxisKey:"co2ppm",
-                yAxisID:"co2"
+                yAxisKey:"co2",
             },
         }
         ],
@@ -64,8 +64,11 @@ export default function Visualization06(){
     const options = {
         responsive: true,
         animation: false,
-        plugins: {
-            
+        interaction:{
+          mode: 'index',
+          intersect: false,
+        },
+        plugins: {            
           legend: {
             position: "top",
           },
@@ -75,24 +78,37 @@ export default function Visualization06(){
           },
         },
         scales: {
-          x: {
+          xAxes: {
             type: "linear",
+            reverse: true,
           },
           temp: {
-            type: "linear",
-            display: true,
-            position: 'right',
-          },
-          co2: {
-            type: "linear",
+            type: 'linear',
             display: true,
             position: 'left',
+          },
+          co2ppm: {
+            type: 'linear',
+            display: true,
+            position: 'right',
+
+            grid:{
+              drawOnChartArea: true,
+            }
           }
         },
         elements: {
           point: {
               radius: 0 // disabled point draw in all datasets
           }
+        }
+      };
+
+      const chartRef = React.useRef(null);
+      
+      const handleResetZoom = () => {
+        if (chartRef && chartRef.current) {
+          chartRef.current.resetZoom();
         }
       };
       

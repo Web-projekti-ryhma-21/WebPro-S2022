@@ -1,4 +1,5 @@
 import './App.css';
+import Nakyma1 from './Nakyma1';
 import Visualization01 from './Visual01';
 import Visualization3n4 from './Visual3n4';
 import Visualization05 from './Visual05';
@@ -26,9 +27,7 @@ function App() {
   return (
 
     <div>
-      <Visualization01 />
-      <Visualization3n4 />
-      <Visualization05 />
+      <Nakyma1 />
 
       <BrowserRouter>
       <Routes>

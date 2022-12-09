@@ -8,23 +8,24 @@ import "chartjs-adapter-luxon";
 export default function Visualization06(){
     Chart.register(zoomPlugin);
 
-    const [icecore800k, seticecore800k] = useState([]);
+    const [icecore800k, setIcecore800k] = useState([]);
     
     const port = 3001
     const domain = 'http://localhost'
-    const rest01 = 'icecore800k'  
+    const rest01 = 'v6icecore'  
     
     //fetching chart data from server database
     //times should be strings
 
     useEffect(() => {
-      async function geticecore800k() {
+      async function getIcecore800k() {
         const r = await axios.get(`${domain}:${port}/${rest01}`);
-        seticecore800k(r.data);
+        r.data.reverse(); //reverse array so it goes from past to present
+        setIcecore800k(r.data);
         console.log(r.data); 
       }
 
-      geticecore800k();
+      getIcecore800k();
     }, []);
 
     const data = {

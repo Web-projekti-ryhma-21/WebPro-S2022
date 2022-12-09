@@ -219,6 +219,45 @@ app.get("/v5vostok",async function (req,res){
 
 })
 
+app.get("/v6icecore",async function (req,res){
+    try{
+        const connection = await mysql.createConnection(config.db)
+        const [result] = await connection.execute('SELECT * FROM icecore800k')
+
+        if (!result) result=[]
+        res.status(200).json(result)
+    } catch(err){
+        res.status(500).json({error:err.message})
+    }
+
+})
+
+app.get("/v7temperaturechange",async function (req,res){
+    try{
+        const connection = await mysql.createConnection(config.db)
+        const [result] = await connection.execute('SELECT * FROM v7temperaturechange')
+
+        if (!result) result=[]
+        res.status(200).json(result)
+    } catch(err){
+        res.status(500).json({error:err.message})
+    }
+
+})
+
+app.get("/v7co2",async function (req,res){
+    try{
+        const connection = await mysql.createConnection(config.db)
+        const [result] = await connection.execute('SELECT * FROM v7co2')
+
+        if (!result) result=[]
+        res.status(200).json(result)
+    } catch(err){
+        res.status(500).json({error:err.message})
+    }
+
+})
+
 app.post('/register',
         (req, res) => {
 
