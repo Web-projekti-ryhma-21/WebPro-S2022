@@ -7,6 +7,7 @@ import "chartjs-adapter-luxon";
 
 export default function Visualization01(){
     Chart.register(zoomPlugin);
+    Chart.defaults.color = '#a0a0a0';
 
     const [glMonth, setGlMonth] = useState([]);
     const [noMonth, setNoMonth] = useState([]);
@@ -69,67 +70,67 @@ export default function Visualization01(){
 const data = {
     datasets: [
       {
-          label: "global annual ",
+          label: "Global annual temperature anomaly",
           data: glAnn,
-          borderColor: "rgb(255, 0, 0)",
-          backgroundColor: "rgba(0, 0, 0, 0.8)",
+          borderColor: "rgb(140, 0, 0)",
+          backgroundColor: "rgba(140, 0, 0, 1)",
           parsing: {
               xAxisKey:"time",
               yAxisKey:"anomaly",
           },
       },
       {
-          label: "global mothly ",
+          label: "Global mothly temperature anomaly",
           data: glMonth,
-          borderColor: "rgb(255, 0, 0)",
-          backgroundColor: "rgba(0, 0, 0, 0.8)",
+          borderColor: "rgb(140, 0, 0)",
+          backgroundColor: "rgba(140, 0, 0, 1)",
           parsing: {
               xAxisKey:"time",
               yAxisKey:"anomaly",
           },
       },
       {
-          label: "northern hemisphere annual ",
+          label: "Northern hemisphere annual temperature anomaly",
           data: noAnn,
-          borderColor: "rgb(0, 0, 255)",
-          backgroundColor: "rgba(0, 0, 0, 0.8)",
+          borderColor: "rgb(0, 0, 140)",
+          backgroundColor: "rgba(0, 0, 140, 1)",
           parsing: {
               xAxisKey:"time",
               yAxisKey:"anomaly",
           },
       },
       {
-          label: "northern hemisphere mothly ",
+          label: "Northern hemisphere mothly temperature anomaly",
           data: noMonth,
-          borderColor: "rgb(0, 0, 255)",
-          backgroundColor: "rgba(0, 0, 0, 0.8)",
+          borderColor: "rgb(0, 0, 140)",
+          backgroundColor: "rgba(0, 0, 140, 1)",
           parsing: {
               xAxisKey:"time",
               yAxisKey:"anomaly",
           },
       },
       {
-          label: "southern hemisphere annual ",
+          label: "Southern hemisphere annual temperature anomaly",
           data: soAnn,
-          borderColor: "rgb(0, 255, 0)",
-          backgroundColor: "rgba(0, 0, 0, 0.8)",
+          borderColor: "rgb(0, 140, 0)",
+          backgroundColor: "rgba(0, 140, 0, 1)",
           parsing: {
               xAxisKey:"time",
               yAxisKey:"anomaly",
           },
       },
       {
-          label: "southern hemisphere mothly ",
+          label: "Southern hemisphere mothly temperature anomaly",
           data: soMonth,
-          borderColor: "rgb(0, 255, 0)",
-          backgroundColor: "rgba(0, 0, 0, 0.8)",
+          borderColor: "rgb(0, 140, 0)",
+          backgroundColor: "rgba(0, 140, 0, 1)",
           parsing: {
               xAxisKey:"time", // jos ei piirry niin tarkista tietokanta, koska kirjainkoolla on väliä ja ekassa tk'ssa oli isolla kirjaimella
               yAxisKey:"anomaly",
           },
       },
       {
-        label: "2000 year temperature ",
+        label: "2000 year temperature anomaly",
         data: vTwo,
         borderColor: "rgb(0, 0, 0)",
         backgroundColor: "rgba(0, 0, 0, 0.8)",
@@ -144,23 +145,32 @@ const data = {
 const options = {
   responsive: true,
   animation: false,
+  interaction:{
+    mode: 'index',
+    intersect: false,
+  },
   plugins: {
       zoom: {
+        pan:{
+          enabled: true,
+        },
         zoom: {
             wheel: {
               enabled: true,
             },
             drag: {
               enabled: true,
+              modifierKey: 'ctrl',
+              treshold: 31540000000*5,
             },
             mode: 'xy',
           },
           limits: {
               y: {
-                min: -2, max: 2, minRange: 0.1
+                min: 'original', max: 'original', minRange: 0.5
               },
               x: {
-                min: 'original', max: 'original',minRange: 30
+                min: 'original', max: 'original', minRange: 31540000000*10, // year in milliseconds * 10
             },
           },
         },
@@ -173,11 +183,19 @@ const options = {
     },
   },
   scales: {
-      xAxis: {
+      x: {
         type: "time",
         display: true,
         time: {
           unit: "year",
+        },
+        grid: {
+          color: "grey",
+        },
+      },
+      y: {
+        grid: {
+          color: "grey",
         },
       },
 
@@ -198,8 +216,9 @@ const chartRef = React.useRef(null);
   };
   
   return (
-    <div style={{ width: "95%" }}>
-      <h1>Visualization 01</h1>
+    <div className="vis-div">
+        <h1>Visualization 01 & 02</h1>
+        <button onClick={handleResetZoom}>Reset Zoom</button>
         <Line 
         ref={chartRef}
         type='line'
@@ -207,8 +226,11 @@ const chartRef = React.useRef(null);
         data={data} 
         redraw = 'true'
         />
-        <button onClick={handleResetZoom}>Reset Zoom</button>
-        <a className="source-link" href="https://www.metoffice.gov.uk/hadobs/hadcrut5/">Source</a>
+        <h4 className="info-title">Description:</h4>
+        <p className="info-text">
+          Global historical surface temperature anomalies from January 1850 onwards with Northern Hemisphere temperature reconstruction for the past 2000 years.</p>
+        <a className="source-link" href="https://www.metoffice.gov.uk/hadobs/hadcrut5/">Source 1</a>
+        <a className="source-link" href="https://www.nature.com/articles/nature03265">Source 2</a>
     </div>
   );
 }

@@ -1,9 +1,12 @@
 import React, {useState, useEffect} from "react";
+import { Chart } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import axios from "axios";
 import "chartjs-adapter-luxon";
 
 export default function Visualization06(){
+    Chart.defaults.color = '#a0a0a0';
+
     const [v7temperaturechange, setv7temperaturechange] = useState([]);
     const [v7co2, setv7co2] = useState([]);
     
@@ -32,7 +35,7 @@ export default function Visualization06(){
     const data = {
         datasets: [
           {
-              label: "v7 temperature change",
+              label: "Temperature change",
               data: v7temperaturechange,
               borderColor: "rgb(0, 0, 155)",
               backgroundColor: "rgba(0, 0, 155, 0.8)",
@@ -43,7 +46,7 @@ export default function Visualization06(){
               },
           },
           {
-            label: "v7 CO2",
+            label: "CO2 ppm",
             data: v7co2,
             borderColor: "rgb(0, 155, 0)",
             backgroundColor: "rgba(0, 155, 0, 0.8)",
@@ -72,22 +75,31 @@ export default function Visualization06(){
           },
         },
         scales: {
-          xAxes: {
+          x: {
             type: "linear",
             reverse: true,
+            grid: {
+              color: "grey",
+            },
           },
           temp: {
             type: 'linear',
             display: true,
-            position: 'left',
+            position: 'right',
+            grid: {
+              color: "grey",
+            },
+            ticks:{
+              color: "grey",
+            }
           },
           co2ppm: {
             type: 'linear',
             display: true,
-            position: 'right',
-
+            position: 'left',
             grid:{
               drawOnChartArea: true,
+              color: "white",
             }
           }
         },
@@ -100,15 +112,20 @@ export default function Visualization06(){
 
      
       return (
-        <div style={{ width: "95%" }}>
-          <h1>Visualization 07</h1>
+        <div className="vis-div">
+            <h1>Visualization 07</h1>
             <Line 
             type='line'
             options={options} 
             data={data} 
             redraw = 'true'
             />
-            <a className="source-link" href="">Source</a>
+            <h4 className="info-title">Description:</h4>        
+            <p className="info-text">
+              Reconstruction of evolution of global temperature over the past 2 million years and Co2 measurements from the past 800 000 years.
+            </p>
+            <a className="source-link" href="https://climate.fas.harvard.edu/files/climate/files/snyder_2016.pdf">Description source</a>
+            <a className="source-link" href="http://carolynsnyder.com/publications.php">Data source</a>
         </div>
       );
 }

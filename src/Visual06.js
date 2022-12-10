@@ -1,9 +1,12 @@
 import React, {useState, useEffect} from "react";
+import { Chart } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import axios from "axios";
 import "chartjs-adapter-luxon";
 
 export default function Visualization06(){
+    Chart.defaults.color = '#a0a0a0';
+
     const [icecore800k, setIcecore800k] = useState([]);
     
     const port = 3001
@@ -26,10 +29,10 @@ export default function Visualization06(){
     const data = {
         datasets: [
           {
-              label: "Ice Core 800k data",
+              label: "Ice Core 800k CO2 ppm",
               data: icecore800k,
               borderColor: "rgb(0, 0, 0)",
-              backgroundColor: "rgba(0, 0, 0, 0.8)",
+              backgroundColor: "rgba(0, 0, 0, 1)",
               parsing: {
                   xAxisKey:"year", //needs to match column name in db
                   yAxisKey:"co2ppm",
@@ -40,6 +43,10 @@ export default function Visualization06(){
     const options = {
         responsive: true,
         animation: false,
+        interaction:{
+          mode: 'index',
+          intersect: false,
+        },
         plugins: {
           legend: {
             position: "top",
@@ -50,9 +57,16 @@ export default function Visualization06(){
           },
         },
         scales: {          
-            xAxis: {
-              display: false,
+          x: {
+            grid: {
+              color: "grey",
             },
+          },
+          y: {
+            grid: {
+              color: "grey",
+            },
+          }
         },
         elements: {
           point: {
@@ -62,15 +76,20 @@ export default function Visualization06(){
       };
               
         return (
-          <div style={{ width: "95%" }}>
-            <h1>Visualization 06</h1>
+          <div className="vis-div">
+              <h1>Visualization 06</h1>
               <Line 
               type='line'
               options={options} 
               data={data} 
               redraw = 'true'
               />
-              <a className="source-link" href="">Source</a>
+              <h4 className="info-title">Description:</h4>
+              <p className="info-text">
+                Reconstruction of atmospheric CO2 concentrations for the last 800,000 years from the European Project for Ice Coring in Antarctica Dome ice core from Dome C (EDC). 
+              </p>
+              <a className="source-link" href="https://www.ncei.noaa.gov/access/paleo-search/study/17975">Description source</a>
+              <a className="source-link" href="https://www.ncei.noaa.gov/pub/data/paleo/icecore/antarctica/antarctica2015co2composite.txt">Data source</a>
           </div>
         );
 }

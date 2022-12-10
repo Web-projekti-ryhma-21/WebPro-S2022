@@ -7,6 +7,7 @@ import "chartjs-adapter-luxon";
 
 export default function Visualization3n4(){
     Chart.register(zoomPlugin);
+    Chart.defaults.color = '#a0a0a0';
 
     const [moaAnn, setMoaAnn] = useState([]);
     const [moaMonth, setMoaMonth] = useState([]);
@@ -58,50 +59,50 @@ export default function Visualization3n4(){
 const data = {
     datasets: [
       {
-          label: "Mauna Loa CO2 annual mean data",
+          label: "Mauna Loa CO2 annual mean CO2 ppm",
           data: moaAnn,
           borderColor: "rgb(0, 0, 0)",
-          backgroundColor: "rgba(0, 0, 0, 0.8)",
+          backgroundColor: "rgba(0, 0, 0, 1)",
           parsing: {
               xAxisKey:"date",
               yAxisKey:"mean",
           },
       },
       {
-          label: "Mauna Loa CO2 monthly mean",
+          label: "Mauna Loa CO2 monthly mean CO2 ppm",
           data: moaMonth,
-          borderColor: "rgb(122, 122, 122)",
-          backgroundColor: "rgba(122, 122, 122, 0.8)",
+          borderColor: "rgb(175, 175, 175)",
+          backgroundColor: "rgba(175, 175, 175, 1)",
           parsing: {
               xAxisKey:"date",
               yAxisKey:"avg",
           },
       },
       {
-          label: "DE08 Ice Core",
+          label: "DE08 Ice Core CO2 ppm",
           data: icDe081,
-          borderColor: "rgb(0, 0, 0)",
-          backgroundColor: "rgba(0, 0, 0, 0.8)",
+          borderColor: "rgb(0, 0, 122)",
+          backgroundColor: "rgba(0, 0, 122, 1)",
           parsing: {
               xAxisKey:"year",
               yAxisKey:"co2ppm",
           },
       },
       {
-          label: "DE08-2 Ice Core",
+          label: "DE08-2 Ice Core CO2 ppm",
           data: icDe082,
-          borderColor: "rgb(122, 122, 122)",
-          backgroundColor: "rgba(122, 122, 122, 0.8)",
+          borderColor: "rgb(0, 122, 0)",
+          backgroundColor: "rgba(0, 122, 0, 1)",
           parsing: {
               xAxisKey:"year",
               yAxisKey:"co2ppm",
           },
       },
       {
-          label: "DSS Ice Core",
+          label: "DSS Ice Core CO2 ppm",
           data: icDss,
-          borderColor: "rgb(122, 122, 122)",
-          backgroundColor: "rgba(122, 122, 122, 0.8)",
+          borderColor: "rgb(122, 0, 0)",
+          backgroundColor: "rgba(122, 0, 0, 1)",
           parsing: {
               xAxisKey:"year",
               yAxisKey:"co2ppm",
@@ -113,21 +114,33 @@ const data = {
 const options = {
   responsive: true,
   animation: false,
+  interaction:{
+    mode: 'index',
+    intersect: false,
+  },
   plugins: {
       zoom: {
+        pan:{
+          enabled: true,
+        },
         zoom: {
             wheel: {
               enabled: true,
             },
             drag: {
               enabled: true,
-              treshold: 100,
+              modifierKey: 'ctrl',
+              treshold: 31540000000*5,
             },
             mode: 'xy',
           },
           limits: {
-              y: {min: 250, max: 450, /*minRange: 0.1*/},
-              x: {min: 'original', max: 'original'/*, minRange: 30*/},
+              y: {
+                min: 'original', max: 'original', minRange: 25
+              },
+              x: {
+                min: 'original', max: 'original', minRange: 31540000000*10, // year in milliseconds * 10
+            },
           },
         },
     legend: {
@@ -142,7 +155,15 @@ const options = {
       xAxis: {
         type: "time",
         time: {
-          unit: "month",
+          unit: "year",
+        },
+        grid: {
+          color: "grey",
+        },
+      },
+      y: {
+        grid: {
+          color: "grey",
         },
       },
   },
@@ -162,8 +183,9 @@ const chartRef = React.useRef(null);
   };
   
   return (
-    <div style={{ width: "95%" }}>
-      <h1>Visualization 03 & 04</h1>
+    <div className="vis-div">
+        <h1>Visualization 03 & 04</h1>
+        <button onClick={handleResetZoom}>Reset Zoom</button>
         <Line 
         ref={chartRef}
         type='line'
@@ -171,8 +193,14 @@ const chartRef = React.useRef(null);
         data={data} 
         redraw = 'true'
         />
-        <button onClick={handleResetZoom}>Reset Zoom</button>
-        <a className="source-link" href="">Source</a>
+        <h4 className="info-title">Description:</h4>
+        <p className="info-text">
+          Atmospheric CO2 concentrations from Mauna Loa measurements starting 1958 with Antarctic Ice Core records of atmospheric CO2 ratio.</p>
+        <a className="source-link" href="https://gml.noaa.gov/ccgg/about/co2_measurements.html">Description source 1</a>
+        <a className="source-link" href="https://gml.noaa.gov/ccgg/trends/">Data source 1</a>
+        <a className="source-link" href="https://cdiac.ess-dive.lbl.gov/trends/co2/lawdome.html">Description source 2</a>
+        <a className="source-link" href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.dat">Data source 2</a>
+
     </div>
   );
 }
