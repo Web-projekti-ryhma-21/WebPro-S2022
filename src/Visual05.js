@@ -9,7 +9,7 @@ export default function Visualization3n4(){
 
     const [vostokCore, setVostokCore] = useState([]);
     
-    const domain = REACT_APP_API_ADDRESS
+    const domain = process.engl.REACT_APP_API_ADDRESS
     const rest01 = 'v5vostok'  
     
     //fetching chart data from server database

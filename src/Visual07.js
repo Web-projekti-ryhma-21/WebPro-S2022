@@ -10,7 +10,7 @@ export default function Visualization06(){
     const [v7temperaturechange, setv7temperaturechange] = useState([]);
     const [v7co2, setv7co2] = useState([]);
     
-    const domain = REACT_APP_API_ADDRESS
+    const domain = process.engl.REACT_APP_API_ADDRESS
     const rest01 = 'v7temperaturechange'  
     const rest02 = 'v7co2' 
     

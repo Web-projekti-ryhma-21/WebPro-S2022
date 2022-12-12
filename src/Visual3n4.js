@@ -15,7 +15,7 @@ export default function Visualization3n4(){
     const [icDe082, setIcDe082] = useState([]);
     const [icDss, setIcDss] = useState([]);
     
-    const domain = REACT_APP_API_ADDRESS
+    const domain = process.engl.REACT_APP_API_ADDRESS
     const rest01 = 'v3annnual'
     const rest02 = 'v3monthly'
     const rest03 = 'v4ica1'

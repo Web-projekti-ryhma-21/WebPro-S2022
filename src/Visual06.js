@@ -9,7 +9,7 @@ export default function Visualization06(){
 
     const [icecore800k, setIcecore800k] = useState([]);
     
-    const domain = REACT_APP_API_ADDRESS
+    const domain = process.engl.REACT_APP_API_ADDRESS
     const rest01 = 'v6icecore'  
     
     //fetching chart data from server database

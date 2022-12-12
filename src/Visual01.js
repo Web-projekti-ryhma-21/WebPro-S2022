@@ -18,7 +18,7 @@ export default function Visualization01(){
     const [vTwo, setVTwo] = useState([]);
 
     
-    const domain = REACT_APP_API_ADDRESS
+    const domain = process.engl.REACT_APP_API_ADDRESS
     
     //fetching chart data from server database
     //times should be strings
