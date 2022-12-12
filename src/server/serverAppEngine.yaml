@@ -1,0 +1,4 @@
+runtime: node16
+service: server
+env_variables:
+  GAE_DN_SOCKET: ""

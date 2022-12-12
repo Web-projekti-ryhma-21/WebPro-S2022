@@ -1,8 +1,7 @@
 const config = {
     db : {
-        host: 'localhost',
-        user: 'root',
-        password: '',
+        user: 'testuser',
+        password: 'DiT5XZOgcasaoEc8CprY',
         database: 'projectdb'
     }
 }

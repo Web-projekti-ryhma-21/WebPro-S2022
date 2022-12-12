@@ -12,9 +12,15 @@ const {v4: uuidv4 } = require('uuid')
 const { db } = require('./config')
 const bcrypt = require('bcrypt')
 const { useResolvedPath } = require('react-router-dom')
-
-
 const app = express()
+const port = process.env.PORT || 3001;
+
+if (process.env.NODE_ENV == "production") {
+    config.db.socketPath = process.env.GAE_DN_SOCKET;
+} else {
+    config.db.host = "127.0.0.1";
+
+}
 
 app.use(bodyParser.json());
 app.use(cors())
@@ -68,10 +74,6 @@ passport.use(new JwtStrategy(jwtOptions, function(jwt_payload, done){
 
     done(null, jwt_payload);
 }))
-
-
-const port = 3001
-
 
 app.get("/globalannual",async function (req,res){
     try{
