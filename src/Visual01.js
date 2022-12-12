@@ -17,41 +17,39 @@ export default function Visualization01(){
     const [soAnn, setSoAnn] = useState([]);
     const [vTwo, setVTwo] = useState([]);
 
-    
-    const domain = process.engl.REACT_APP_API_ADDRESS
-    
+  
     //fetching chart data from server database
     //times should be strings
 
     useEffect(() => {
       async function getGlAnn() {
-        const r = await axios.get(`${domain}/globalannual`);
-        setGlAnn(r.data); 
+        const r = await axios.get(process.env.REACT_APP_API_ADDRESS + "/globalannual");
+        setGlAnn(r.data);
       }
       async function getNoAnn() {
-        const r = await axios.get(`${domain}/northernhemisphereannual`);
+        const r = await axios.get(process.env.REACT_APP_API_ADDRESS + "/northernhemisphereannual");
         setNoAnn(r.data);
       }
       async function getSoAnn() {
-        const r = await axios.get(`${domain}/southernhemisphereannual`);
+        const r = await axios.get(process.env.REACT_APP_API_ADDRESS + "/southernhemisphereannual");
         console.log(r.data);        
         setSoAnn(r.data);
       }
       async function getGlMonth() {
-        const r = await axios.get(`${domain}/globalmonthly`);
+        const r = await axios.get(process.env.REACT_APP_API_ADDRESS + "/globalmonthly");
         setGlMonth(r.data);
       }
       async function getNoMonth() {
-        const r = await axios.get(`${domain}/northernhemispheremonthly`);
+        const r = await axios.get(process.env.REACT_APP_API_ADDRESS + "/northernhemispheremonthly");
         setNoMonth(r.data);        
       }
       async function getSoMonth() {
-        const r = await axios.get(`${domain}/southernhemispheremonthly`);
+        const r = await axios.get(process.env.REACT_APP_API_ADDRESS + "/southernhemispheremonthly");
         console.log(r.data);        
         setSoMonth(r.data);        
       }
       async function getVTwo() {
-        const r = await axios.get(`${domain}/v2`);
+        const r = await axios.get(process.env.REACT_APP_API_ADDRESS + "/v2");
         setVTwo(r.data);
         console.log(r.data);        
       }

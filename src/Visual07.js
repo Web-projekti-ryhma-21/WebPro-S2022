@@ -10,7 +10,6 @@ export default function Visualization06(){
     const [v7temperaturechange, setv7temperaturechange] = useState([]);
     const [v7co2, setv7co2] = useState([]);
     
-    const domain = process.engl.REACT_APP_API_ADDRESS
     const rest01 = 'v7temperaturechange'  
     const rest02 = 'v7co2' 
     
@@ -19,11 +18,11 @@ export default function Visualization06(){
 
     useEffect(() => {
       async function getv7temperaturechange() {
-        const r = await axios.get(`${domain}/${rest01}`);
+        const r = await axios.get(process.env.REACT_APP_API_ADDRESS + "/"+ rest01);
         setv7temperaturechange(r.data);
       }
       async function getv7co2() {
-        const r = await axios.get(`${domain}/${rest02}`);
+        const r = await axios.get(process.env.REACT_APP_API_ADDRESS + "/"+ rest02);
         setv7co2(r.data);
       }
 
