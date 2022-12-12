@@ -18,41 +18,40 @@ export default function Visualization01(){
     const [vTwo, setVTwo] = useState([]);
 
     
-    const port = 3001
-    const domain = 'http://localhost'
+    const domain = REACT_APP_API_ADDRESS
     
     //fetching chart data from server database
     //times should be strings
 
     useEffect(() => {
       async function getGlAnn() {
-        const r = await axios.get(`${domain}:${port}/globalannual`);
+        const r = await axios.get(`${domain}/globalannual`);
         setGlAnn(r.data); 
       }
       async function getNoAnn() {
-        const r = await axios.get(`${domain}:${port}/northernhemisphereannual`);
+        const r = await axios.get(`${domain}/northernhemisphereannual`);
         setNoAnn(r.data);
       }
       async function getSoAnn() {
-        const r = await axios.get(`${domain}:${port}/southernhemisphereannual`);
+        const r = await axios.get(`${domain}/southernhemisphereannual`);
         console.log(r.data);        
         setSoAnn(r.data);
       }
       async function getGlMonth() {
-        const r = await axios.get(`${domain}:${port}/globalmonthly`);
+        const r = await axios.get(`${domain}/globalmonthly`);
         setGlMonth(r.data);
       }
       async function getNoMonth() {
-        const r = await axios.get(`${domain}:${port}/northernhemispheremonthly`);
+        const r = await axios.get(`${domain}/northernhemispheremonthly`);
         setNoMonth(r.data);        
       }
       async function getSoMonth() {
-        const r = await axios.get(`${domain}:${port}/southernhemispheremonthly`);
+        const r = await axios.get(`${domain}/southernhemispheremonthly`);
         console.log(r.data);        
         setSoMonth(r.data);        
       }
       async function getVTwo() {
-        const r = await axios.get(`${domain}:${port}/v2`);
+        const r = await axios.get(`${domain}/v2`);
         setVTwo(r.data);
         console.log(r.data);        
       }

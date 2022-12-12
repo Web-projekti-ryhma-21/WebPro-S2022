@@ -9,8 +9,7 @@ export default function Visualization3n4(){
 
     const [vostokCore, setVostokCore] = useState([]);
     
-    const port = 3001
-    const domain = 'http://localhost'
+    const domain = REACT_APP_API_ADDRESS
     const rest01 = 'v5vostok'  
     
     //fetching chart data from server database
@@ -18,7 +17,7 @@ export default function Visualization3n4(){
 
     useEffect(() => {
       async function getVostokCore() {
-        const r = await axios.get(`${domain}:${port}/${rest01}`);
+        const r = await axios.get(`${domain}/${rest01}`);
         r.data.reverse(); //reverse array so it goes from past to present
         setVostokCore(r.data);
       }

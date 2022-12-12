@@ -1,4 +1,4 @@
 runtime: node16
 service: server
 env_variables:
-  GAE_DN_SOCKET: ""
+  GAE_DN_SOCKET: "/cloudsql/webpro-s2022:europe-west1:webpro-s2022-db"

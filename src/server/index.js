@@ -13,13 +13,12 @@ const { db } = require('./config')
 const bcrypt = require('bcrypt')
 const { useResolvedPath } = require('react-router-dom')
 const app = express()
-const port = process.env.PORT || 3001;
 
+const port = process.env.PORT || 3001;
 if (process.env.NODE_ENV == "production") {
     config.db.socketPath = process.env.GAE_DN_SOCKET;
 } else {
     config.db.host = "127.0.0.1";
-
 }
 
 app.use(bodyParser.json());
