@@ -1,5 +1,0 @@
-runtime: nodejs16
-service: server
-entrypoint: node index.js
-env_variables:
-  GAE_DN_SOCKET: "/cloudsql/webpro-s2022:europe-west1:webpro-s2022-db"
