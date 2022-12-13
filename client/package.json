@@ -1,5 +1,4 @@
 {
-  "homepage": "http://localhost:3001/",
   "name": "client",
   "version": "0.1.0",
   "private": true,
@@ -21,7 +20,6 @@
     "luxon": "^3.1.0",
     "match-sorter": "^6.3.1",
     "mysql2": "^2.3.3",
-    "nodejs": "^0.0.0",
     "nodemon": "^2.0.20",
     "passport": "^0.6.0",
     "passport-http": "^0.3.0",
@@ -58,16 +56,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Web-projekti-ryhma-21/client.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Web-projekti-ryhma-21/client/issues"
   }
 }

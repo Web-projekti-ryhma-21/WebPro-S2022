@@ -15,8 +15,6 @@ export default function Visualization3n4(){
     const [icDe082, setIcDe082] = useState([]);
     const [icDss, setIcDss] = useState([]);
     
-    const port = 3001
-    const domain = 'http://localhost'
     const rest01 = 'v3annnual'
     const rest02 = 'v3monthly'
     const rest03 = 'v4ica1'
@@ -28,23 +26,23 @@ export default function Visualization3n4(){
 
     useEffect(() => {
       async function getMoaAnn() {
-        const r = await axios.get(`${domain}:${port}/${rest01}`);
+        const r = await axios.get(process.env.REACT_APP_API_ADDRESS + "/"+ rest01);
         setMoaAnn(r.data);
       }
       async function getMoaMonth() {
-        const r = await axios.get(`${domain}:${port}/${rest02}`);
+        const r = await axios.get(process.env.REACT_APP_API_ADDRESS + "/"+ rest02);
         setMoaMonth(r.data);
       }
       async function getDe081() {
-        const r = await axios.get(`${domain}:${port}/${rest03}`);
+        const r = await axios.get(process.env.REACT_APP_API_ADDRESS + "/"+ rest03);
         setIcDe081(r.data);
       }
       async function getDe082() {
-        const r = await axios.get(`${domain}:${port}/${rest04}`);
+        const r = await axios.get(process.env.REACT_APP_API_ADDRESS + "/"+ rest04);
         setIcDe082(r.data);
       }
       async function getIcDss() {
-        const r = await axios.get(`${domain}:${port}/${rest05}`);
+        const r = await axios.get(process.env.REACT_APP_API_ADDRESS + "/"+ rest05);
         setIcDss(r.data);
       }
       getMoaAnn();

@@ -17,42 +17,39 @@ export default function Visualization01(){
     const [soAnn, setSoAnn] = useState([]);
     const [vTwo, setVTwo] = useState([]);
 
-    
-    const port = 3001
-    const domain = 'http://localhost'
-    
+  
     //fetching chart data from server database
     //times should be strings
 
     useEffect(() => {
       async function getGlAnn() {
-        const r = await axios.get(`${domain}:${port}/globalannual`);
-        setGlAnn(r.data); 
+        const r = await axios.get(process.env.REACT_APP_API_ADDRESS + "/globalannual");
+        setGlAnn(r.data);
       }
       async function getNoAnn() {
-        const r = await axios.get(`${domain}:${port}/northernhemisphereannual`);
+        const r = await axios.get(process.env.REACT_APP_API_ADDRESS + "/northernhemisphereannual");
         setNoAnn(r.data);
       }
       async function getSoAnn() {
-        const r = await axios.get(`${domain}:${port}/southernhemisphereannual`);
+        const r = await axios.get(process.env.REACT_APP_API_ADDRESS + "/southernhemisphereannual");
         console.log(r.data);        
         setSoAnn(r.data);
       }
       async function getGlMonth() {
-        const r = await axios.get(`${domain}:${port}/globalmonthly`);
+        const r = await axios.get(process.env.REACT_APP_API_ADDRESS + "/globalmonthly");
         setGlMonth(r.data);
       }
       async function getNoMonth() {
-        const r = await axios.get(`${domain}:${port}/northernhemispheremonthly`);
+        const r = await axios.get(process.env.REACT_APP_API_ADDRESS + "/northernhemispheremonthly");
         setNoMonth(r.data);        
       }
       async function getSoMonth() {
-        const r = await axios.get(`${domain}:${port}/southernhemispheremonthly`);
+        const r = await axios.get(process.env.REACT_APP_API_ADDRESS + "/southernhemispheremonthly");
         console.log(r.data);        
         setSoMonth(r.data);        
       }
       async function getVTwo() {
-        const r = await axios.get(`${domain}:${port}/v2`);
+        const r = await axios.get(process.env.REACT_APP_API_ADDRESS + "/v2");
         setVTwo(r.data);
         console.log(r.data);        
       }

@@ -9,8 +9,6 @@ export default function Visualization06(){
 
     const [icecore800k, setIcecore800k] = useState([]);
     
-    const port = 3001
-    const domain = 'http://localhost'
     const rest01 = 'v6icecore'  
     
     //fetching chart data from server database
@@ -18,7 +16,7 @@ export default function Visualization06(){
 
     useEffect(() => {
       async function getIcecore800k() {
-        const r = await axios.get(`${domain}:${port}/${rest01}`);
+        const r = await axios.get(process.env.REACT_APP_API_ADDRESS + "/"+ rest01);
         r.data.reverse(); //reverse array so it goes from past to present
         setIcecore800k(r.data);
       }

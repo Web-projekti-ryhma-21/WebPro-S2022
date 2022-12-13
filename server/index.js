@@ -1,26 +1,30 @@
 const express = require('express')
-const cors = require('cors')
+const app = express()
+const cors = require('cors');
+const mysql = require('mysql2/promise')
+const config = require('./config')
+/*
+const { useResolvedPath } = require('react-router-dom')
 const passport = require('passport')
 const BasicStrategy = require('passport-http').BasicStrategy
 const jwt = require('jsonwebtoken')
 const JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt
     const bodyParser = require('body-parser')
-const mysql = require('mysql2/promise')
-const config = require('./config')
 const {v4: uuidv4 } = require('uuid')
 const { db } = require('./config')
 const bcrypt = require('bcrypt')
-const { useResolvedPath } = require('react-router-dom')
+*/
 
+const port = process.env.PORT || 3001;
 
-const app = express()
-
-app.use(bodyParser.json());
-app.use(cors())
+app.use(cors());
 app.use(express.json())
-app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.urlencoded({extended:false}))
+/*
+app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.json());
+
 
 const users = [
     {
@@ -68,11 +72,7 @@ passport.use(new JwtStrategy(jwtOptions, function(jwt_payload, done){
 
     done(null, jwt_payload);
 }))
-
-
-const port = 3001
-
-
+*/
 app.get("/globalannual",async function (req,res){
     try{
         const connection = await mysql.createConnection(config.db)
@@ -271,7 +271,7 @@ app.get("/v7co2",async function (req,res){
     }
 
 })
-
+/*
 app.post('/register',
         (req, res) => {
 
@@ -290,7 +290,6 @@ app.post('/register',
   users.addUser(req.body.username, hashedPassword);
 
 })
-
 app.post(
     '/login',
     passport.authenticate('basic', { session: false }),
@@ -318,5 +317,5 @@ app.post(
   app.get('/protected', passport.authenticate('jwt', { session: false }), (req, res) => {
     res.send("OK for user " + req.user.user.username + 'id is' + req.user.user.id);
   })
-
+*/
 app.listen(port)
