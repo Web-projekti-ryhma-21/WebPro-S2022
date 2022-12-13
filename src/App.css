@@ -1,38 +1,62 @@
-.App {
+:root {
+  --text-colour: #a0a0a0;
+}
+
+body {
+  background-color: #263842;
+  color: var(--text-colour);
+}
+
+h1{
+  color: var(--text-colour);
+  margin-top: 2em;
+}
+
+a:link{
+  color: rgb(140, 200, 255);
+}
+a:visited{
+  color: rgb(160, 160, 240);
+}
+
+button {
+  background-color: #588096;
+  border: solid;
+  border-width: 1px;
+  border-color: black;
+  color: black;
   text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1em;
+}
+.protected{
+  background-color: red;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.koti {
+padding: 15%;
+margin: 10%;  
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.vis-div {
+  width: 95%;
+  padding-left: 2em;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.source-link {
+  padding: 0.2em;
+  float: right;
 }
 
-.App-link {
-  color: #61dafb;
+.info-text {
+  color: var(--text-colour);
+  margin-top: 0em;
+  margin-bottom: 1em;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.info-title {
+  color: var(--text-colour);
+  margin-top: 0.3em;
+  margin-bottom: 0.6em;
 }
