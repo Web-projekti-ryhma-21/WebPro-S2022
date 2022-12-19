@@ -10,6 +10,9 @@ Loginiä klikkaamalla avautuu kaksi kohtaa, joista toiseen kirjoitetaan käyttä
 
 Klikkaamalla ”Sign up” avaa sovellus käyttäjänluomis lomakkeen, jossa voi valita itselleen käyttäjätunnus sekä salasanan. Salasana pitää kirjoittaa kaksi kertaa estääkseen väärinkirjoituksia ja vahinko painalluksia.
 
+![kuva1](https://user-images.githubusercontent.com/101518980/208433318-bd017ad8-b422-419f-819f-a426237d29f2.png)
+*Kuva 1*
+
 ### Visualisoinnit
 
 Kirjautumisen jälkeen sovellus vie käyttäjän ensimmäiseen visualisointiin. (kuva 2)
