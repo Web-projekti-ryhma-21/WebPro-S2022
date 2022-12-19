@@ -16,13 +16,16 @@ Klikkaamalla ”Sign up” avaa sovellus käyttäjänluomis lomakkeen, jossa voi
 ### Visualisoinnit
 
 Kirjautumisen jälkeen sovellus vie käyttäjän ensimmäiseen visualisointiin. (kuva 2)
+
 Kaikissa visualisoinneissa on interaktiivinen käyttöjärjestelmä, jota voi muokkailla haluamallaan tavalla.
 Graffeja pystyy ”zoomailemaan” ja palauttamaan takaisin ”oletus zoomiin” painamalla: ”Reset zoom.” Graffissa voi valita haluamat datat klikkaamalla yläpuolella olevia värejä. Kaikkiin graffin datoihin löytyy linkit oikeasta alakulmasta.
 
+![kuva 2](https://user-images.githubusercontent.com/101518980/208435462-7c2fb853-39a5-43cd-94a0-221e4288abde.png)
+*Kuva 2*
 
 Linkki web-sovellukseen: http://webpro-s2022.ew.r.appspot.com/
+
 Linkki projektin esittelyvideoon: https://youtu.be/LTfxNuT5VmA
-Linkki projektin GitHubiin: https://github.com/Web-projekti-ryhma-21
 
 ### Ryhmä 21 jäsenet:
 Petteri Sippala, Antti Alajääskö, Jussi Henttunen ja Julius Roos
